@@ -223,6 +223,11 @@ if [[ -e "$workdir"/"$zipper_path" ]]; then
     cd "$workdir"/"$zipper_path" || exit 127
     rm -rf .git
     zip -r9 "$zip_filename" . -x .gitignore README.md || exit 127
+    echo "Zip: $zip_filename"
+	curl --upload-file "$zip_filename" https://free.keep.sh
+	echo
+    curl --upload-file "$workdir"/"$zipper_path"/"$zip_filename" https://free.keep.sh
+    echo
     set_output outfile "$workdir"/"$zipper_path"/"$zip_filename"
     cd "$workdir" || exit 127
     exit 0
